@@ -1,5 +1,6 @@
 "use client";
-import { IVehicle } from "@/utils/api/geektrust-api";
+
+import { IVehicle } from "@/interfaces/api-interfaces/geektrust-api-interface";
 import React, { FC } from "react";
 
 export interface IAvailableVehicles extends IVehicle {
@@ -15,11 +16,12 @@ const VehicleSelector: FC<VehicleSelectorProps> = ({
   vehicles,
   vehicleSelectCallback,
 }) => {
-  const handleVehicleSelect = (name: string, disabled: boolean) => (e) => {
-    if (!disabled) {
-      vehicleSelectCallback(name);
-    }
-  };
+  const handleVehicleSelect =
+    (name: string, disabled: boolean) => (e: React.MouseEvent<HTMLElement>) => {
+      if (!disabled) {
+        vehicleSelectCallback(name);
+      }
+    };
   return (
     <section className="py-10">
       <h3 className="text-lg">Choose vehicle to search the planet</h3>

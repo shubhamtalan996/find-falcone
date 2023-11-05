@@ -1,22 +1,18 @@
 "use client";
-import { IPlanet, IVehicle } from "@/utils/api/geektrust-api";
+
 import React, { FC, useState } from "react";
 import VehicleSelector, { IAvailableVehicles } from "./VehicleSelector";
 import PlanetSelector from "./PlanetSelector";
-
-interface SelectorConsoleProps {
-  planets: IPlanet[];
-  vehicles: IVehicle[];
-}
-
-interface ISelectionPayload {
-  planet_names: string[];
-  vehicle_names: string[];
-}
-
-export interface IAvailablePlanets extends IPlanet {
-  disabled?: boolean;
-}
+import { geekTrustApi } from "@/utils/api";
+import useFindFalconeHook from "@/hooks/useFindFalconeHook";
+import {
+  IPlanet,
+  ISelectionPayload,
+} from "@/interfaces/api-interfaces/geektrust-api-interface";
+import {
+  IAvailablePlanets,
+  SelectorConsoleProps,
+} from "@/interfaces/component-interfaces/selector-console-interface";
 
 const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
   const [remainingVehicles, setRemainingVehicles] =
@@ -25,10 +21,19 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
     useState<IAvailablePlanets[]>(planets);
   const [selectedPlanet, setSelectedPlanet] = useState<string>();
 
+  const {
+    data: { planet_name: falconesPlanet = "", status } = {},
+    loading,
+    trigger,
+    error,
+  } = useFindFalconeHook();
+
   const [selectionPayload, setSelectionPayload] = useState<ISelectionPayload>({
     planet_names: [],
     vehicle_names: [],
   });
+
+  const isFleetReady = selectionPayload?.planet_names?.length === 4;
 
   const handlePlanetSelect = (planet: IPlanet) => {
     const { distance, name } = planet;
@@ -44,67 +49,72 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
     });
   };
 
-  console.log({ selectionPayload });
-
   const vehicleSelectCallback = (vehicleName: string) => {
-    setSelectionPayload((prev) => {
-      const { planet_names = [], vehicle_names = [] } = prev;
-      return {
-        planet_names: [...planet_names, selectedPlanet],
-        vehicle_names: [...vehicle_names, vehicleName],
-      };
-    });
-    setRemainingPlanets((prev) => {
-      return prev.filter(
-        ({ name: planetName }) => planetName !== selectedPlanet
-      );
-    });
-    setSelectedPlanet(undefined);
-    setRemainingVehicles((prevRemainingVehicles) => {
-      const tempRemainingVehicles: IAvailableVehicles[] = [];
-      prevRemainingVehicles.forEach((vehicle) => {
-        const { total_no, name } = vehicle;
-        if (vehicleName === name) {
-          let totalRemainingVehiclesType = total_no - 1;
-          if (totalRemainingVehiclesType >= 1) {
-            tempRemainingVehicles.push({
-              ...vehicle,
-              total_no: totalRemainingVehiclesType,
-            });
-          }
-        } else {
-          tempRemainingVehicles.push(vehicle);
-        }
+    if (selectedPlanet) {
+      setSelectionPayload((prev) => {
+        const { planet_names = [], vehicle_names = [] } = prev;
+        return {
+          planet_names: [...planet_names, selectedPlanet],
+          vehicle_names: [...vehicle_names, vehicleName],
+        };
       });
-      return tempRemainingVehicles;
-    });
+      setRemainingPlanets((prev) => {
+        return prev.filter(
+          ({ name: planetName }) => planetName !== selectedPlanet
+        );
+      });
+      setRemainingVehicles((prevRemainingVehicles) => {
+        const tempRemainingVehicles: IAvailableVehicles[] = [];
+        prevRemainingVehicles.forEach((vehicle) => {
+          const { total_no, name } = vehicle;
+          if (vehicleName === name) {
+            let totalRemainingVehiclesType = total_no - 1;
+            if (totalRemainingVehiclesType >= 1) {
+              tempRemainingVehicles.push({
+                ...vehicle,
+                total_no: totalRemainingVehiclesType,
+              });
+            }
+          } else {
+            tempRemainingVehicles.push(vehicle);
+          }
+        });
+        return tempRemainingVehicles;
+      });
+      setSelectedPlanet(undefined);
+    }
+  };
+
+  const sendFleet = () => {
+    trigger(selectionPayload);
   };
 
   return (
     <div className="p-5 rounded-md border-1">
-      {/* <div className="py-10">
-        <h3 className="text-lg">Choose Planet to search</h3>
-        <div className="flex flex-row justify-between gap-5 flex-wrap shadow-md py-5">
-          {planets.map(({ name, distance }) => (
-            <div
-              key={name}
-              className="rounded-md border-2 p-4 cursor-pointer"
-              onClick={handlePlanetSelect({ name, distance })}
-            >
-              <p>Name:{name}</p>
-              <p>Distance:{distance}</p>
-            </div>
-          ))}
-        </div>
-      </div> */}
-      <PlanetSelector
-        planets={remainingPlanets}
-        planetSelectCallback={handlePlanetSelect}
-      />
-      <VehicleSelector
-        vehicles={remainingVehicles}
-        vehicleSelectCallback={vehicleSelectCallback}
-      />
+      {!isFleetReady && (
+        <PlanetSelector
+          planets={remainingPlanets}
+          planetSelectCallback={handlePlanetSelect}
+        />
+      )}
+      {!isFleetReady && selectedPlanet && (
+        <VehicleSelector
+          vehicles={remainingVehicles}
+          vehicleSelectCallback={vehicleSelectCallback}
+        />
+      )}
+      {isFleetReady && (
+        <button
+          type="button"
+          onClick={sendFleet}
+          className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+        >
+          Send Fleet
+        </button>
+      )}
+      {status === "success" && falconesPlanet && (
+        <p>{`Traitor Planet: ${falconesPlanet}`}</p>
+      )}
     </div>
   );
 };

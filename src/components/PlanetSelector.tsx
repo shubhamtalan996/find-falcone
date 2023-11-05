@@ -1,7 +1,10 @@
 "use client";
-import { IPlanet, IVehicle } from "@/utils/api/geektrust-api";
+import {
+  IPlanet,
+  IVehicle,
+} from "@/interfaces/api-interfaces/geektrust-api-interface";
+import { IAvailablePlanets } from "@/interfaces/component-interfaces/selector-console-interface";
 import React, { FC } from "react";
-import { IAvailablePlanets } from "./SelectorConsole";
 
 export interface IAvailableVehicles extends IVehicle {
   disabled?: boolean;
@@ -16,9 +19,10 @@ const PlanetSelector: FC<IPlanetsSelectorProps> = ({
   planets,
   planetSelectCallback,
 }) => {
-  const handlePlanetSelect = (planet: IPlanet) => (e) => {
-    planetSelectCallback(planet);
-  };
+  const handlePlanetSelect =
+    (planet: IPlanet) => (e: React.MouseEvent<HTMLElement>) => {
+      planetSelectCallback(planet);
+    };
   return (
     <div className="py-10">
       <h3 className="text-lg">Choose Planet to search</h3>
