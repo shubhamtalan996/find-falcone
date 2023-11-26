@@ -3,7 +3,6 @@
 import React, { FC, useState } from "react";
 import VehicleSelector, { IAvailableVehicles } from "./VehicleSelector";
 import PlanetSelector from "./PlanetSelector";
-import { geekTrustApi } from "@/utils/api";
 import useFindFalconeHook from "@/hooks/useFindFalconeHook";
 import {
   IPlanet,
@@ -13,6 +12,8 @@ import {
   IAvailablePlanets,
   SelectorConsoleProps,
 } from "@/interfaces/component-interfaces/selector-console-interface";
+import Image from "next/image";
+import { loadingSpaceship } from "@/assets/jpeg";
 
 const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
   const [remainingVehicles, setRemainingVehicles] =
@@ -111,6 +112,15 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
         >
           Send Fleet
         </button>
+      )}
+      {loading && (
+        <Image
+          width={200}
+          height={200}
+          referrerPolicy="no-referrer"
+          src={loadingSpaceship}
+          alt={`Planet ${name}`}
+        />
       )}
       {status === "success" && falconesPlanet && (
         <p>{`Traitor Planet: ${falconesPlanet}`}</p>

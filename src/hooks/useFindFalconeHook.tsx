@@ -5,6 +5,8 @@ import {
 import { geekTrustApi } from "@/utils/api";
 import { useState } from "react";
 
+const ANIMATION_LOADING_TIME = 4000;
+
 const useFindFalconeHook = () => {
   const [data, setData] = useState<IFindFalconeResponse>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -16,13 +18,15 @@ const useFindFalconeHook = () => {
       setLoading(true);
       setData(undefined);
       setError(undefined);
-      geekTrustApi
-        .sendFleet(requestData)
-        .then((res) => setData(res))
-        .catch((err) => setError(err))
-        .finally(() => {
-          setLoading(false);
-        });
+      setTimeout(() => {
+        geekTrustApi
+          .sendFleet(requestData)
+          .then((res) => setData(res))
+          .catch((err) => setError(err))
+          .finally(() => {
+            setLoading(false);
+          });
+      }, [ANIMATION_LOADING_TIME]);
     }
   };
 

@@ -5,6 +5,8 @@ import {
 } from "@/interfaces/api-interfaces/geektrust-api-interface";
 import { IAvailablePlanets } from "@/interfaces/component-interfaces/selector-console-interface";
 import React, { FC } from "react";
+import { destroyPlanet, midPlanet, saturn } from "@/assets/jpeg";
+import Image from "next/image";
 
 export interface IAvailableVehicles extends IVehicle {
   disabled?: boolean;
@@ -19,6 +21,7 @@ const PlanetSelector: FC<IPlanetsSelectorProps> = ({
   planets,
   planetSelectCallback,
 }) => {
+  const planetImages = [destroyPlanet, midPlanet, saturn];
   const handlePlanetSelect =
     (planet: IPlanet) => (e: React.MouseEvent<HTMLElement>) => {
       planetSelectCallback(planet);
@@ -27,18 +30,27 @@ const PlanetSelector: FC<IPlanetsSelectorProps> = ({
     <div className="py-10">
       <h3 className="text-lg">Choose Planet to search</h3>
       <div className="flex flex-row justify-between gap-5 flex-wrap shadow-md py-5">
-        {planets.map((planet) => {
+        {planets.map((planet, index) => {
           const { name, distance, disabled } = planet;
           return (
             <div
               key={name}
-              className={`rounded-md border-2 p-4 cursor-pointer ${
+              onClick={handlePlanetSelect(planet)}
+              className={`rounded-md border-2 p-4 cursor-pointer text-center ${
                 disabled && "hidden"
               }`}
-              onClick={handlePlanetSelect(planet)}
             >
-              <p>Name:{name}</p>
-              <p>Distance:{distance}</p>
+              <Image
+                width={150}
+                height={150}
+                referrerPolicy="no-referrer"
+                src={planetImages[index ? index % 3 : index]}
+                alt={`Planet ${name}`}
+              />
+              <div>
+                <p>Name:{name}</p>
+                <p>Distance:{distance}</p>
+              </div>
             </div>
           );
         })}
