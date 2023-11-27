@@ -5,7 +5,14 @@ import {
 } from "@/interfaces/api-interfaces/geektrust-api-interface";
 import { IAvailablePlanets } from "@/interfaces/component-interfaces/selector-console-interface";
 import React, { FC } from "react";
-import { destroyPlanet, midPlanet, saturn } from "@/assets/jpeg";
+import {
+  destroyPlanet,
+  midPlanet,
+  saturn,
+  jupiter,
+  bluePlanet,
+  greenSaturn,
+} from "@/assets/jpeg/planets";
 import Image from "next/image";
 
 export interface IAvailableVehicles extends IVehicle {
@@ -21,14 +28,23 @@ const PlanetSelector: FC<IPlanetsSelectorProps> = ({
   planets,
   planetSelectCallback,
 }) => {
-  const planetImages = [destroyPlanet, midPlanet, saturn];
+  const planetImages = [
+    destroyPlanet,
+    midPlanet,
+    saturn,
+    jupiter,
+    bluePlanet,
+    greenSaturn,
+  ];
   const handlePlanetSelect =
     (planet: IPlanet) => (e: React.MouseEvent<HTMLElement>) => {
       planetSelectCallback(planet);
     };
   return (
     <div className="py-10">
-      <h3 className="text-lg">Choose Planet to search</h3>
+      <h3 className="text-xl from-indigo-300 bg-gradient-to-r">
+        Choose Planet to search
+      </h3>
       <div className="flex flex-row justify-between gap-5 flex-wrap shadow-md py-5">
         {planets.map((planet, index) => {
           const { name, distance, disabled } = planet;
@@ -36,7 +52,7 @@ const PlanetSelector: FC<IPlanetsSelectorProps> = ({
             <div
               key={name}
               onClick={handlePlanetSelect(planet)}
-              className={`rounded-md border-2 p-4 cursor-pointer text-center ${
+              className={`rounded-md  p-4 cursor-pointer text-center ${
                 disabled && "hidden"
               }`}
             >
@@ -44,10 +60,10 @@ const PlanetSelector: FC<IPlanetsSelectorProps> = ({
                 width={150}
                 height={150}
                 referrerPolicy="no-referrer"
-                src={planetImages[index ? index % 3 : index]}
+                src={planetImages[index % 6]}
                 alt={`Planet ${name}`}
               />
-              <div>
+              <div className="text-sm pt-2">
                 <p>Name:{name}</p>
                 <p>Distance:{distance}</p>
               </div>

@@ -5,7 +5,7 @@ import {
 import { geekTrustApi } from "@/utils/api";
 import { useState } from "react";
 
-const ANIMATION_LOADING_TIME = 4000;
+const ANIMATION_LOADING_TIME: number = 3000;
 
 const useFindFalconeHook = () => {
   const [data, setData] = useState<IFindFalconeResponse>();

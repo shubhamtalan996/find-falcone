@@ -13,11 +13,25 @@ import {
   SelectorConsoleProps,
 } from "@/interfaces/component-interfaces/selector-console-interface";
 import Image from "next/image";
-import { loadingSpaceship } from "@/assets/jpeg";
+import { loadingSpaceship } from "@/assets/jpeg/planets";
+import {
+  rocket1,
+  rocket2,
+  rocket3,
+  rocket4,
+  rocket5,
+} from "@/assets/jpeg/spacecrafts";
 
 const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
-  const [remainingVehicles, setRemainingVehicles] =
-    useState<IAvailableVehicles[]>(vehicles);
+  const spacecrafts = [rocket1, rocket2, rocket4, rocket5];
+  const [remainingVehicles, setRemainingVehicles] = useState<
+    IAvailableVehicles[]
+  >(
+    (vehicles || []).map((vehicle, index) => ({
+      ...vehicle,
+      image: spacecrafts[index],
+    }))
+  );
   const [remainingPlanets, setRemainingPlanets] =
     useState<IAvailablePlanets[]>(planets);
   const [selectedPlanet, setSelectedPlanet] = useState<string>();

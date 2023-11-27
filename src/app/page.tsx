@@ -1,6 +1,6 @@
 import SelectorConsole from "@/components/SelectorConsole";
 import { geekTrustApi } from "@/utils/api";
-import { spaceBackground } from "@/assets/jpeg";
+// import { spaceBackground } from "@/assets/jpeg";
 import Image from "next/image";
 
 export default async function Home() {
@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <main
       className="min-h-screen p-24"
-      style={{ backgroundImage: spaceBackground }}
+      // style={{ backgroundImage: spaceBackground.src }}
     >
       <h1 className="text-4xl bg-gradient-to-r from-indigo-500 text-left font-extrabold">
         Find falcone...
