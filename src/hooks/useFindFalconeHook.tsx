@@ -26,7 +26,7 @@ const useFindFalconeHook = () => {
           .finally(() => {
             setLoading(false);
           });
-      }, [ANIMATION_LOADING_TIME]);
+      }, ANIMATION_LOADING_TIME);
     }
   };
 
