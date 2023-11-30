@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <main
-      className="min-h-screen p-24"
+      className="min-h-screen p-5 md:p-24 "
       // style={{ backgroundImage: spaceBackground.src }}
     >
       <h1 className="text-4xl bg-gradient-to-r from-indigo-500 text-left font-extrabold">
