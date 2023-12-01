@@ -5,14 +5,6 @@ import {
 } from "@/interfaces/api-interfaces/geektrust-api-interface";
 import { IAvailablePlanets } from "@/interfaces/component-interfaces/selector-console-interface";
 import React, { FC } from "react";
-import {
-  destroyPlanet,
-  midPlanet,
-  saturn,
-  jupiter,
-  bluePlanet,
-  greenSaturn,
-} from "@/assets/jpeg/planets";
 import Image from "next/image";
 
 export interface IAvailableVehicles extends IVehicle {
@@ -22,20 +14,14 @@ export interface IAvailableVehicles extends IVehicle {
 interface IPlanetsSelectorProps {
   planets: IAvailablePlanets[];
   planetSelectCallback: (planet: IPlanet) => void;
+  planetsImages: Object;
 }
 
 const PlanetSelector: FC<IPlanetsSelectorProps> = ({
   planets,
   planetSelectCallback,
+  planetsImages,
 }) => {
-  const planetImages = [
-    destroyPlanet,
-    midPlanet,
-    saturn,
-    jupiter,
-    bluePlanet,
-    greenSaturn,
-  ];
   const handlePlanetSelect =
     (planet: IPlanet) => (e: React.MouseEvent<HTMLElement>) => {
       planetSelectCallback(planet);
@@ -60,7 +46,7 @@ const PlanetSelector: FC<IPlanetsSelectorProps> = ({
                 width={150}
                 height={150}
                 referrerPolicy="no-referrer"
-                src={planetImages[index % 6]}
+                src={planetsImages[name]}
                 alt={`Planet ${name}`}
               />
               <div className="text-sm pt-2">

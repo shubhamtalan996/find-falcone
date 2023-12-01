@@ -10,6 +10,9 @@ export interface IVehicle {
   speed: number;
 }
 
+// export interface IFindFalconeHookState extends IFindFalconeResponse {
+//   requestData
+// }
 export interface IFindFalconeResponse {
   planet_name?: string;
   status: string;

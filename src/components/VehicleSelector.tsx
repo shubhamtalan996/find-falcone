@@ -5,18 +5,19 @@ import React, { FC } from "react";
 import Image, { StaticImageData } from "next/image";
 
 export interface IAvailableVehicles extends IVehicle {
-  image: StaticImageData;
   disabled?: boolean;
 }
 
 interface VehicleSelectorProps {
   vehicles: IAvailableVehicles[];
   vehicleSelectCallback: (name: string) => void;
+  vehiclesImages: Object;
 }
 
 const VehicleSelector: FC<VehicleSelectorProps> = ({
   vehicles,
   vehicleSelectCallback,
+  vehiclesImages,
 }) => {
   const handleVehicleSelect =
     (name: string, disabled: boolean) => (e: React.MouseEvent<HTMLElement>) => {
@@ -31,14 +32,7 @@ const VehicleSelector: FC<VehicleSelectorProps> = ({
       </h3>
       <div className="flex flex-row justify-between gap-5 flex-wrap shadow-md py-5">
         {vehicles.map(
-          ({
-            name,
-            disabled = false,
-            total_no,
-            max_distance,
-            speed,
-            image,
-          }) => (
+          ({ name, disabled = false, total_no, max_distance, speed }) => (
             <div
               key={name}
               className={`rounded-md p-4 cursor-pointer flex flex-col items-center text-center ${
@@ -50,7 +44,7 @@ const VehicleSelector: FC<VehicleSelectorProps> = ({
                 width={150}
                 height={150}
                 referrerPolicy="no-referrer"
-                src={image}
+                src={vehiclesImages[name]}
                 alt={`Planet ${name}`}
               />
               <div className="text-sm pt-2">

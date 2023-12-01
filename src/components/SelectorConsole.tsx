@@ -14,41 +14,27 @@ import {
 } from "@/interfaces/component-interfaces/selector-console-interface";
 import Image from "next/image";
 import { loadingSpaceship } from "@/assets/jpeg/planets";
-import {
-  rocket1,
-  rocket2,
-  rocket3,
-  rocket4,
-  rocket5,
-} from "@/assets/jpeg/spacecrafts";
+import { planetsJson, spacecraftsJson } from "@/constants/assetsConfig";
+import { FirstAppranceVader } from "@/assets/charactors";
 
 const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
-  const spacecrafts = [rocket1, rocket2, rocket4, rocket5];
   const [remainingVehicles, setRemainingVehicles] = useState<
     IAvailableVehicles[]
-  >(
-    (vehicles || []).map((vehicle, index) => ({
-      ...vehicle,
-      image: spacecrafts[index],
-    }))
-  );
+  >([...vehicles]);
   const [remainingPlanets, setRemainingPlanets] =
     useState<IAvailablePlanets[]>(planets);
   const [selectedPlanet, setSelectedPlanet] = useState<string>();
 
   const {
-    data: { planet_name: falconesPlanet = "", status } = {},
+    data: { planet_name: falconePlanet = "", status } = {},
     loading,
     trigger,
     error,
   } = useFindFalconeHook();
 
-  const [selectionPayload, setSelectionPayload] = useState<ISelectionPayload>({
-    planet_names: [],
-    vehicle_names: [],
-  });
+  const [selectionState, setSelectionState] = useState({});
 
-  const isFleetReady = selectionPayload?.planet_names?.length === 4;
+  const isFleetReady = Object.entries(selectionState)?.length === 4;
 
   const handlePlanetSelect = (planet: IPlanet) => {
     const { distance, name } = planet;
@@ -66,13 +52,10 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
 
   const vehicleSelectCallback = (vehicleName: string) => {
     if (selectedPlanet) {
-      setSelectionPayload((prev) => {
-        const { planet_names = [], vehicle_names = [] } = prev;
-        return {
-          planet_names: [...planet_names, selectedPlanet],
-          vehicle_names: [...vehicle_names, vehicleName],
-        };
-      });
+      setSelectionState((prev) => ({
+        ...prev,
+        [selectedPlanet]: vehicleName,
+      }));
       setRemainingPlanets((prev) => {
         return prev.filter(
           ({ name: planetName }) => planetName !== selectedPlanet
@@ -101,7 +84,15 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
   };
 
   const sendFleet = () => {
-    trigger(selectionPayload);
+    const selectionPayload1: ISelectionPayload = {
+      planet_names: [],
+      vehicle_names: [],
+    };
+    for (const [key, value] of Object.entries(selectionState)) {
+      selectionPayload1.planet_names.push(key);
+      selectionPayload1.vehicle_names.push(value as string);
+    }
+    trigger(selectionPayload1);
   };
 
   return (
@@ -109,12 +100,14 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
       {!isFleetReady && (
         <PlanetSelector
           planets={remainingPlanets}
+          planetsImages={planetsJson}
           planetSelectCallback={handlePlanetSelect}
         />
       )}
       {!isFleetReady && selectedPlanet && (
         <VehicleSelector
           vehicles={remainingVehicles}
+          vehiclesImages={spacecraftsJson}
           vehicleSelectCallback={vehicleSelectCallback}
         />
       )}
@@ -127,17 +120,31 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
           Send Fleet
         </button>
       )}
-      {loading && (
-        <Image
-          width={200}
-          height={200}
-          referrerPolicy="no-referrer"
-          src={loadingSpaceship}
-          alt={`Planet ${name}`}
-        />
-      )}
-      {status === "success" && falconesPlanet && (
-        <p>{`Traitor Planet: ${falconesPlanet}`}</p>
+      {status === "success" && falconePlanet && (
+        <div className="relative w-100">
+          <div className="animate-linear-progress">
+            <Image
+              width={60}
+              height={60}
+              referrerPolicy="no-referrer"
+              src={spacecraftsJson[selectionState[falconePlanet]]}
+              className="absolute rotate-90 my-14"
+              alt={`vehicle moving`}
+            />
+          </div>
+
+          <div className="absolute right-0">
+            <Image
+              width={150}
+              height={150}
+              referrerPolicy="no-referrer"
+              src={planetsJson[falconePlanet]}
+              className="rotate-90 "
+              alt={`Trailtor Planet`}
+            />
+            <p>{`Traitor Planet: ${falconePlanet}`}</p>
+          </div>
+        </div>
       )}
     </div>
   );
