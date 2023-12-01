@@ -1,3 +1,4 @@
+import { FirstAppranceVader } from "@/assets/charactors";
 import SelectorConsole from "@/components/SelectorConsole";
 import { geekTrustApi } from "@/utils/api";
 // import { spaceBackground } from "@/assets/jpeg";
@@ -12,6 +13,13 @@ export default async function Home() {
       className="min-h-screen p-5 md:p-24 "
       // style={{ backgroundImage: spaceBackground.src }}
     >
+      <Image
+        width={300}
+        height={300}
+        referrerPolicy="no-referrer"
+        src={FirstAppranceVader}
+        alt={`King Shaan`}
+      />
       <h1 className="text-4xl bg-gradient-to-r from-indigo-500 text-left font-extrabold">
         Find falcone...
       </h1>
