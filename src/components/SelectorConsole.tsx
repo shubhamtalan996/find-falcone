@@ -95,6 +95,11 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
     trigger(selectionPayload1);
   };
 
+  //   const starsWarsThemeAudio = new Audio(
+  //     "https://s.cdpn.io/1202/Star_Wars_original_opening_crawl_1977.mp3"
+  //   );
+  //   starsWarsThemeAudio.play();
+
   return (
     <div className="p-5 rounded-md border-1">
       {!isFleetReady && (

@@ -19,10 +19,30 @@ const config: Config = {
             transform: "translateX(calc(100% - 250px))",
           },
         },
+        crawl: {
+          "0%": {
+            top: "-100px",
+            transform: "rotateX(20deg)  translateZ(0)",
+          },
+          "100%": {
+            top: "-6000px",
+            transform: "rotateX(25deg) translateZ(-2500px)",
+          },
+        },
       },
       animation: {
         "linear-progress":
           "move 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+        "crawl-progress": "crawl 30s linear forwards",
+      },
+      letterSpacing: {
+        starWars: "6px",
+      },
+      colors: {
+        starwars: "#feda4a",
+      },
+      fontFamily: {
+        starwars: `'Pathway Gothic One', sans-serif`,
       },
     },
   },
