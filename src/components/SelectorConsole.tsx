@@ -13,9 +13,8 @@ import {
   SelectorConsoleProps,
 } from "@/interfaces/component-interfaces/selector-console-interface";
 import Image from "next/image";
-import { loadingSpaceship } from "@/assets/jpeg/planets";
 import { planetsJson, spacecraftsJson } from "@/constants/assetsConfig";
-import { FirstAppranceVader } from "@/assets/charactors";
+import { FailedVader, FirstAppranceVader, WinVader } from "@/assets/charactors";
 
 const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
   const [remainingVehicles, setRemainingVehicles] = useState<
@@ -126,30 +125,59 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
         </button>
       )}
       {status === "success" && falconePlanet && (
-        <div className="relative w-100">
-          <div className="animate-linear-progress">
-            <Image
-              width={60}
-              height={60}
-              referrerPolicy="no-referrer"
-              src={spacecraftsJson[selectionState[falconePlanet]]}
-              className="absolute rotate-90 my-14"
-              alt={`vehicle moving`}
-            />
+        <div>
+          <Image
+            width={400}
+            height={400}
+            referrerPolicy="no-referrer"
+            src={FailedVader}
+            className="my-14"
+            alt={`vehicle moving`}
+          />
+          <div className="relative w-100">
+            <div className="animate-linear-progress">
+              <Image
+                width={60}
+                height={60}
+                referrerPolicy="no-referrer"
+                src={spacecraftsJson[selectionState[falconePlanet]]}
+                className="absolute rotate-90 my-14"
+                alt={`vehicle moving`}
+              />
+            </div>
+
+            <div className="absolute right-0">
+              <Image
+                width={150}
+                height={150}
+                referrerPolicy="no-referrer"
+                src={planetsJson[falconePlanet]}
+                className="rotate-90 "
+                alt={`Trailtor Planet`}
+              />
+              <p>{`Traitor Planet: ${falconePlanet}`}</p>
+            </div>
           </div>
 
-          <div className="absolute right-0">
-            <Image
-              width={150}
-              height={150}
-              referrerPolicy="no-referrer"
-              src={planetsJson[falconePlanet]}
-              className="rotate-90 "
-              alt={`Trailtor Planet`}
-            />
-            <p>{`Traitor Planet: ${falconePlanet}`}</p>
-          </div>
+          <Image
+            width={400}
+            height={400}
+            referrerPolicy="no-referrer"
+            src={WinVader}
+            className="my-14"
+            alt={`vehicle moving`}
+          />
         </div>
+      )}
+      {status === "false" && (
+        <Image
+          width={400}
+          height={400}
+          referrerPolicy="no-referrer"
+          src={FailedVader}
+          className="my-14"
+          alt={`vehicle moving`}
+        />
       )}
     </div>
   );
