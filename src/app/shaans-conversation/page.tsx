@@ -1,8 +1,9 @@
-import { FirstAppranceVader, bobaFettHeadshot } from "@/assets/charactors";
+import { BobaFettHeadshot, FirstAppranceVader } from "@/assets/charactors";
 import React from "react";
 import Image from "next/image";
 import Navigation from "@/components/Navigation";
 import Typewriter from "@/components/Typewriter";
+import Chat from "@/components/Chat";
 
 const ConversationData = [
   {
@@ -35,21 +36,21 @@ const ShaansConversation = () => {
             src={FirstAppranceVader}
             alt={`King Shan`}
           />
-          <div className="flex h-[10rem] mt-10 ml-10 w-[50%] border-2 rounded-2xl border-red-500 p-5">
+          <Chat stylingclasses="border-red-500 h-[10rem] mt-10 ml-10 w-[50%]">
             <Typewriter text={ConversationData[0].text} delay={50} />
-          </div>
+          </Chat>
         </div>
         <div className="flex flex-row-reverse w-100 p-10">
           <Image
             width={150}
             height={150}
             referrerPolicy="no-referrer"
-            src={bobaFettHeadshot}
+            src={BobaFettHeadshot}
             alt={`Boba Fett`}
           />
-          <div className="flex h-[9rem]  mt-10 mr-10 w-[50%] border-2 rounded-2xl border-green-500 p-5">
+          <Chat stylingclasses="border-green-500 h-[9rem] w-[50%] mt-10 mr-10">
             <Typewriter text={ConversationData[0].text} delay={50} />
-          </div>
+          </Chat>
         </div>
       </div>
     </div>

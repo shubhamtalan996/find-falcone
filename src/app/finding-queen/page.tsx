@@ -6,7 +6,7 @@ const FindingQueen = async ({}) => {
   const planets = (await geekTrustApi.getPlanets()) || [];
   const vehicles = (await geekTrustApi.getSpaceVehicles()) || [];
   return (
-    <section className="p-5 md:p-24">
+    <section className="p-5 md:px-24 md:py-3">
       <SelectorConsole {...{ planets, vehicles }} />
     </section>
   );

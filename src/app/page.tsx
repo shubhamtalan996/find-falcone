@@ -10,16 +10,9 @@ export default async function Home() {
   const vehicles = (await geekTrustApi.getSpaceVehicles()) || [];
 
   return (
-    <main
-      className="min-h-screen"
-      // style={{ backgroundImage: spaceBackground.src }}
-    >
+    <main className="min-h-screen">
       <Navigation nextPageUrl="/shaans-conversation" autoSkipTime={12000} />
       <StoryIntro />
-
-      {/* <section className="p-5 md:p-24">
-        <SelectorConsole {...{ planets, vehicles }} />
-      </section> */}
     </main>
   );
 }

@@ -29,11 +29,20 @@ const config: Config = {
             transform: "rotateX(25deg) translateZ(-2500px)",
           },
         },
+        delayed: {
+          "0%": {
+            opacity: "0",
+          },
+          "100%": {
+            opacity: "1",
+          },
+        },
       },
       animation: {
         "linear-progress":
           "move 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
-        "crawl-progress": "crawl 30s linear forwards",
+        "crawl-progress": "crawl 40s linear forwards",
+        "delayed-view": "delayed 2s linear",
       },
       letterSpacing: {
         starWars: "6px",

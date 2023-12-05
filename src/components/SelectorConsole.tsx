@@ -14,9 +14,21 @@ import {
 } from "@/interfaces/component-interfaces/selector-console-interface";
 import Image from "next/image";
 import { planetsJson, spacecraftsJson } from "@/constants/assetsConfig";
-import { FailedVader, FirstAppranceVader, WinVader } from "@/assets/charactors";
+import {
+  FailedVader,
+  FirstAppranceVader,
+  deathVader,
+  forceVader,
+  scaryVaderGif,
+} from "@/assets/charactors";
+import { useRouter } from "next/navigation";
+import VoyageAnimation from "./VoyageAnimation";
+import FalicorniaFound from "./FalicorniaFound";
+import Controls from "./Controls";
+import FalicorniaNotFound from "./FalicorniaNotFound";
 
 const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
+  const router = useRouter();
   const [remainingVehicles, setRemainingVehicles] = useState<
     IAvailableVehicles[]
   >([...vehicles]);
@@ -29,6 +41,7 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
     loading,
     trigger,
     error,
+    reset: resetHook,
   } = useFindFalconeHook();
 
   const [selectionState, setSelectionState] = useState({});
@@ -94,13 +107,24 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
     trigger(selectionPayload1);
   };
 
+  const reset = () => {
+    resetHook();
+    setRemainingVehicles([...vehicles]);
+    setRemainingPlanets([...planets]);
+    setSelectionState({});
+  };
+
+  const rebootGame = () => {
+    router.push("/");
+  };
+
   //   const starsWarsThemeAudio = new Audio(
   //     "https://s.cdpn.io/1202/Star_Wars_original_opening_crawl_1977.mp3"
   //   );
   //   starsWarsThemeAudio.play();
 
   return (
-    <div className="p-5 rounded-md border-1">
+    <div className="p-5 rounded-md border-1 min-h-screen">
       {!isFleetReady && (
         <PlanetSelector
           planets={remainingPlanets}
@@ -115,70 +139,33 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
           vehicleSelectCallback={vehicleSelectCallback}
         />
       )}
-      {isFleetReady && (
-        <button
-          type="button"
-          onClick={sendFleet}
-          className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-        >
-          Send Fleet
-        </button>
-      )}
-      {status === "success" && falconePlanet && (
+      <div className="relative min-h-full">
         <div>
-          <Image
-            width={400}
-            height={400}
-            referrerPolicy="no-referrer"
-            src={FailedVader}
-            className="my-14"
-            alt={`vehicle moving`}
-          />
-          <div className="relative w-100">
-            <div className="animate-linear-progress">
-              <Image
-                width={60}
-                height={60}
-                referrerPolicy="no-referrer"
-                src={spacecraftsJson[selectionState[falconePlanet]]}
-                className="absolute rotate-90 my-14"
-                alt={`vehicle moving`}
-              />
-            </div>
+          {status === "success" && falconePlanet && (
+            <FalicorniaFound
+              planet={{
+                image: planetsJson[falconePlanet],
+                alt: "Traitor Planet",
+                name: falconePlanet,
+              }}
+              vehicle={{
+                image: spacecraftsJson[selectionState[falconePlanet]],
+                alt: "vehicle moving",
+                name: "",
+              }}
+            />
+          )}
+          {status === "false" && <FalicorniaNotFound />}
+        </div>
 
-            <div className="absolute right-0">
-              <Image
-                width={150}
-                height={150}
-                referrerPolicy="no-referrer"
-                src={planetsJson[falconePlanet]}
-                className="rotate-90 "
-                alt={`Trailtor Planet`}
-              />
-              <p>{`Traitor Planet: ${falconePlanet}`}</p>
-            </div>
-          </div>
-
-          <Image
-            width={400}
-            height={400}
-            referrerPolicy="no-referrer"
-            src={WinVader}
-            className="my-14"
-            alt={`vehicle moving`}
+        <div className="control-panel ">
+          <Controls
+            {...{ sendFleet, reset, rebootGame }}
+            isFleetReady={isFleetReady && status !== "success"}
+            sendFleetText={`Send Fleet${status === "false" ? " Again!" : "!"}`}
           />
         </div>
-      )}
-      {status === "false" && (
-        <Image
-          width={400}
-          height={400}
-          referrerPolicy="no-referrer"
-          src={FailedVader}
-          className="my-14"
-          alt={`vehicle moving`}
-        />
-      )}
+      </div>
     </div>
   );
 };

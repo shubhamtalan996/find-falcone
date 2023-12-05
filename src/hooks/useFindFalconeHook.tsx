@@ -30,7 +30,13 @@ const useFindFalconeHook = () => {
     }
   };
 
-  return { data, loading, trigger, error };
+  const reset = () => {
+    setData(undefined);
+    setLoading(false);
+    setError(undefined);
+  };
+
+  return { data, loading, trigger, error, reset };
 };
 
 export default useFindFalconeHook;

@@ -13,11 +13,15 @@ const Typewriter: FC<TypewriterProps> = ({ text, delay }) => {
   useEffect(() => {
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
-        setCurrentText((prevText) => prevText + text[currentIndex]);
+        setCurrentText(
+          (prevText) => prevText.slice(0, -1) + text[currentIndex] + "|"
+        );
         setCurrentIndex((prevIndex) => prevIndex + 1);
       }, delay);
 
       return () => clearTimeout(timeout);
+    } else {
+      setCurrentText(text);
     }
   }, [currentIndex, delay, text]);
 
