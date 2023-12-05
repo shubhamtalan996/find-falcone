@@ -63,10 +63,12 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
 
   const vehicleSelectCallback = (vehicleName: string) => {
     if (selectedPlanet) {
-      setSelectionState((prev) => ({
-        ...prev,
-        [selectedPlanet as IPlanetsJsonEnum]: vehicleName as IVehiclesJsonEnum,
-      }));
+      setSelectionState((prev: any) => {
+        let updatedSelection = prev instanceof Object ? { ...prev } : {};
+        updatedSelection[selectedPlanet as IPlanetsJsonEnum] =
+          vehicleName as IVehiclesJsonEnum;
+        return updatedSelection;
+      });
       setRemainingPlanets((prev) => {
         return prev.filter(
           ({ name: planetName }) => planetName !== selectedPlanet
