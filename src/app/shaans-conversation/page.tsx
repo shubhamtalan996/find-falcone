@@ -37,7 +37,7 @@ const ShaansConversation = () => {
             alt={`King Shan`}
           />
           <Chat stylingclasses="border-red-500 h-[10rem] mt-10 ml-10 w-[50%]">
-            <Typewriter text={ConversationData[0].text} delay={50} />
+            <Typewriter text={ConversationData[0].text} />
           </Chat>
         </div>
         <div className="flex flex-row-reverse w-100 p-10">
@@ -49,7 +49,7 @@ const ShaansConversation = () => {
             alt={`Boba Fett`}
           />
           <Chat stylingclasses="border-green-500 h-[9rem] w-[50%] mt-10 mr-10">
-            <Typewriter text={ConversationData[0].text} delay={50} />
+            <Typewriter text={ConversationData[0].text} />
           </Chat>
         </div>
       </div>

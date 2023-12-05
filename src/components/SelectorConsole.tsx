@@ -17,9 +17,7 @@ import { planetsJson, spacecraftsJson } from "@/constants/assetsConfig";
 import {
   FailedVader,
   FirstAppranceVader,
-  deathVader,
   forceVader,
-  scaryVaderGif,
 } from "@/assets/charactors";
 import { useRouter } from "next/navigation";
 import VoyageAnimation from "./VoyageAnimation";
@@ -118,11 +116,6 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
     router.push("/");
   };
 
-  //   const starsWarsThemeAudio = new Audio(
-  //     "https://s.cdpn.io/1202/Star_Wars_original_opening_crawl_1977.mp3"
-  //   );
-  //   starsWarsThemeAudio.play();
-
   return (
     <div className="p-5 rounded-md border-1 min-h-screen">
       {!isFleetReady && (
@@ -152,6 +145,11 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
                 image: spacecraftsJson[selectionState[falconePlanet]],
                 alt: "vehicle moving",
                 name: "",
+              }}
+              tripLogs={{
+                timeTaken: 4,
+                distanceCovered: 200,
+                speed: 50,
               }}
             />
           )}

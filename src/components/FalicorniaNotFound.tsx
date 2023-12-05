@@ -18,7 +18,6 @@ const FalicorniaNotFound = () => {
       <Chat stylingclasses="border-red-500 h-[7rem] mt-10 ml-10 w-[50%]">
         <Typewriter
           text={`Ahhh! Damn the resistance! How can the entire fleet not find a single queen! Useless scums!`}
-          delay={50}
         />
       </Chat>
     </div>

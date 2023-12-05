@@ -1,8 +1,6 @@
-import React, { FC } from "react";
+import React from "react";
 
-interface StoryIntroProps {}
-
-const StoryIntro: FC<StoryIntroProps> = ({}) => {
+const StoryIntro = () => {
   return (
     <div>
       <div
@@ -18,7 +16,7 @@ const StoryIntro: FC<StoryIntroProps> = ({}) => {
       <section
         className="star-wars flex justify-center  font-semibold text-starwars text-center font-starwars"
         style={{
-          perspective: "400px",
+          perspective: "450px",
           height: "200px",
           fontSize: "500%",
           lineHeight: "150%",
@@ -41,6 +39,14 @@ const StoryIntro: FC<StoryIntroProps> = ({}) => {
           </h2>
         </div>
       </section>
+      <audio
+        className="hidden"
+        src={"/Star_Wars_Main_Theme_Song.mp3"}
+        controls
+        autoPlay
+      >
+        Davenport
+      </audio>
     </div>
   );
 };
