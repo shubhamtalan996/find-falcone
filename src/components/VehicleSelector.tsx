@@ -3,6 +3,7 @@
 import { IVehicle } from "@/interfaces/api-interfaces/geektrust-api-interface";
 import React, { FC } from "react";
 import Image, { StaticImageData } from "next/image";
+import { IVehiclesJson, IVehiclesJsonEnum } from "@/constants/assetsConfig";
 
 export interface IAvailableVehicles extends IVehicle {
   disabled?: boolean;
@@ -11,7 +12,7 @@ export interface IAvailableVehicles extends IVehicle {
 interface VehicleSelectorProps {
   vehicles: IAvailableVehicles[];
   vehicleSelectCallback: (name: string) => void;
-  vehiclesImages: Object;
+  vehiclesImages: IVehiclesJson;
 }
 
 const VehicleSelector: FC<VehicleSelectorProps> = ({
@@ -44,7 +45,7 @@ const VehicleSelector: FC<VehicleSelectorProps> = ({
                 width={150}
                 height={150}
                 referrerPolicy="no-referrer"
-                src={vehiclesImages[name]}
+                src={vehiclesImages[name as IVehiclesJsonEnum]}
                 alt={`Planet ${name}`}
               />
               <div className="text-sm pt-2">

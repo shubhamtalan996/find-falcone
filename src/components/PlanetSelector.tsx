@@ -5,7 +5,8 @@ import {
 } from "@/interfaces/api-interfaces/geektrust-api-interface";
 import { IAvailablePlanets } from "@/interfaces/component-interfaces/selector-console-interface";
 import React, { FC } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
+import { IPlanetsJson, IPlanetsJsonEnum } from "@/constants/assetsConfig";
 
 export interface IAvailableVehicles extends IVehicle {
   disabled?: boolean;
@@ -14,7 +15,7 @@ export interface IAvailableVehicles extends IVehicle {
 interface IPlanetsSelectorProps {
   planets: IAvailablePlanets[];
   planetSelectCallback: (planet: IPlanet) => void;
-  planetsImages: Object;
+  planetsImages: IPlanetsJson;
 }
 
 const PlanetSelector: FC<IPlanetsSelectorProps> = ({
@@ -46,7 +47,7 @@ const PlanetSelector: FC<IPlanetsSelectorProps> = ({
                 width={150}
                 height={150}
                 referrerPolicy="no-referrer"
-                src={planetsImages[name]}
+                src={planetsImages[name as IPlanetsJsonEnum]}
                 alt={`Planet ${name}`}
               />
               <div className="text-sm pt-2">

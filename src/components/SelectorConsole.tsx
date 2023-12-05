@@ -12,15 +12,13 @@ import {
   IAvailablePlanets,
   SelectorConsoleProps,
 } from "@/interfaces/component-interfaces/selector-console-interface";
-import Image from "next/image";
-import { planetsJson, spacecraftsJson } from "@/constants/assetsConfig";
 import {
-  FailedVader,
-  FirstAppranceVader,
-  forceVader,
-} from "@/assets/charactors";
+  IPlanetsJsonEnum,
+  IVehiclesJsonEnum,
+  planetsJson,
+  spacecraftsJson,
+} from "@/constants/assetsConfig";
 import { useRouter } from "next/navigation";
-import VoyageAnimation from "./VoyageAnimation";
 import FalicorniaFound from "./FalicorniaFound";
 import Controls from "./Controls";
 import FalicorniaNotFound from "./FalicorniaNotFound";
@@ -42,9 +40,12 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
     reset: resetHook,
   } = useFindFalconeHook();
 
-  const [selectionState, setSelectionState] = useState({});
+  const [selectionState, setSelectionState] = useState();
 
-  const isFleetReady = Object.entries(selectionState)?.length === 4;
+  const isFleetReady =
+    selectionState && Object.entries(selectionState)?.length === 4
+      ? true
+      : false;
 
   const handlePlanetSelect = (planet: IPlanet) => {
     const { distance, name } = planet;
@@ -64,7 +65,7 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
     if (selectedPlanet) {
       setSelectionState((prev) => ({
         ...prev,
-        [selectedPlanet]: vehicleName,
+        [selectedPlanet as IPlanetsJsonEnum]: vehicleName as IVehiclesJsonEnum,
       }));
       setRemainingPlanets((prev) => {
         return prev.filter(
@@ -94,22 +95,24 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
   };
 
   const sendFleet = () => {
-    const selectionPayload1: ISelectionPayload = {
-      planet_names: [],
-      vehicle_names: [],
-    };
-    for (const [key, value] of Object.entries(selectionState)) {
-      selectionPayload1.planet_names.push(key);
-      selectionPayload1.vehicle_names.push(value as string);
+    if (selectionState) {
+      const selectionPayload1: ISelectionPayload = {
+        planet_names: [],
+        vehicle_names: [],
+      };
+      for (const [key, value] of Object.entries(selectionState)) {
+        selectionPayload1.planet_names.push(key);
+        selectionPayload1.vehicle_names.push(value as string);
+      }
+      trigger(selectionPayload1);
     }
-    trigger(selectionPayload1);
   };
 
   const reset = () => {
     resetHook();
     setRemainingVehicles([...vehicles]);
     setRemainingPlanets([...planets]);
-    setSelectionState({});
+    setSelectionState(undefined);
   };
 
   const rebootGame = () => {
@@ -134,15 +137,20 @@ const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
       )}
       <div className="relative min-h-full">
         <div>
-          {status === "success" && falconePlanet && (
+          {status === "success" && falconePlanet && selectionState && (
             <FalicorniaFound
               planet={{
-                image: planetsJson[falconePlanet],
+                image: planetsJson[falconePlanet as IPlanetsJsonEnum],
                 alt: "Traitor Planet",
                 name: falconePlanet,
               }}
               vehicle={{
-                image: spacecraftsJson[selectionState[falconePlanet]],
+                image:
+                  spacecraftsJson[
+                    selectionState[
+                      falconePlanet as IPlanetsJsonEnum
+                    ] as IVehiclesJsonEnum
+                  ],
                 alt: "vehicle moving",
                 name: "",
               }}
