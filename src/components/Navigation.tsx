@@ -8,7 +8,10 @@ interface NavigationProps {
   autoSkipTime?: number;
 }
 
-const Navigation: FC<NavigationProps> = ({ nextPageUrl, autoSkipTime }) => {
+const Navigation: FC<NavigationProps> = ({
+  nextPageUrl,
+  autoSkipTime = 15000,
+}) => {
   const router = useRouter();
 
   const navigate = () => {
@@ -16,12 +19,13 @@ const Navigation: FC<NavigationProps> = ({ nextPageUrl, autoSkipTime }) => {
   };
 
   useEffect(() => {
-    if (autoSkipTime) {
-      setTimeout(() => {
-        navigate();
-      }, autoSkipTime);
-    }
-  });
+    const animationTimer = setTimeout(() => {
+      navigate();
+    }, autoSkipTime);
+    return () => {
+      clearTimeout(animationTimer);
+    };
+  }, [autoSkipTime]);
   return (
     <div>
       <button
