@@ -17,8 +17,8 @@ const VoyageAnimation: FC<IVoyageAnimationProps> = ({ vehicle, planet }) => {
     <div className="relative w-100">
       <div className="animate-linear-progress">
         <Image
-          width={60}
-          height={60}
+          width={80}
+          height={80}
           referrerPolicy="no-referrer"
           src={vehicle.image}
           className="absolute rotate-90 my-14"
@@ -28,8 +28,8 @@ const VoyageAnimation: FC<IVoyageAnimationProps> = ({ vehicle, planet }) => {
 
       <div className="absolute right-0">
         <Image
-          width={150}
-          height={150}
+          width={200}
+          height={200}
           referrerPolicy="no-referrer"
           src={planet.image}
           className="rotate-90 "

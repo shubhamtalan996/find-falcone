@@ -5,16 +5,20 @@ import { forceVader } from "@/assets/charactors";
 import Chat from "./Chat";
 import Typewriter from "./Typewriter";
 
-interface IFalicorniaFound extends IVoyageAnimationProps {
+export interface ILabelValuePair {
+  label: string;
+  value: string;
+}
+export interface IFalicorniaFound extends IVoyageAnimationProps {
   tripLogs: {
-    timeTaken: number;
-    distanceCovered: number;
-    speed: number;
+    timeTaken: ILabelValuePair;
+    distanceCovered: ILabelValuePair;
+    speed: ILabelValuePair;
+    spacecraft: ILabelValuePair;
   };
 }
 
 const FalicorniaFound: FC<IFalicorniaFound> = ({ tripLogs, ...props }) => {
-  const { timeTaken, distanceCovered, speed } = tripLogs;
   return (
     <div className="result">
       <VoyageAnimation {...{ ...props }} />
@@ -36,18 +40,13 @@ const FalicorniaFound: FC<IFalicorniaFound> = ({ tripLogs, ...props }) => {
         </div>
         <div className="py-10 text-starwars">
           <h3 className="text-xl py-5">Trip Logs:</h3>
-          <span className="text-starwars flex">
-            <p className="text-md">Time Taken:&nbsp;</p>
-            {timeTaken}
-          </span>
-          <span className="text-starwars flex">
-            <p className="text-md">Distance Covered:&nbsp;</p>
-            {distanceCovered}
-          </span>
-          <span className="text-starwars flex">
-            <p className="text-md">Speed:&nbsp;</p>
-            {speed}
-          </span>
+
+          {Object.entries(tripLogs).map(([key, { label, value }]) => (
+            <span className="text-starwars flex" key={key}>
+              <p className="text-md">{label}&nbsp;</p>
+              {value}
+            </span>
+          ))}
         </div>
       </div>
     </div>

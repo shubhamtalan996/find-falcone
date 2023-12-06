@@ -25,6 +25,13 @@ const Typewriter: FC<TypewriterProps> = ({ text, delay = 20 }) => {
     }
   }, [currentIndex, delay, text]);
 
+  useEffect(() => {
+    if (text) {
+      setCurrentText("");
+      setCurrentIndex(0);
+    }
+  }, [text]);
+
   return <span>{currentText}</span>;
 };
 

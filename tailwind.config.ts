@@ -16,7 +16,7 @@ const config: Config = {
       keyframes: {
         move: {
           "100%": {
-            transform: "translateX(calc(100% - 250px))",
+            transform: "translateX(calc(100% - 300px))",
           },
         },
         crawl: {
