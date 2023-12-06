@@ -20,7 +20,6 @@ import { IFalicorniaFound } from "@/components/FalicorniaFound";
 const useSelectorConsoleHook = (vehicles: IVehicle[], planets: IPlanet[]) => {
   const {
     data: { planet_name: falconePlanet = "", status } = {},
-    loading,
     trigger,
     reset: resetHook,
   } = useFindFalconeHook();

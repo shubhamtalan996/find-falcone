@@ -49,7 +49,10 @@ const ShaansConversation = () => {
           />
           {shanDialogue && (
             <Chat stylingclasses="border-red-500 h-[10rem] mt-10 w-[50%]">
-              <Typewriter text={shanDialogue} />
+              <Typewriter
+                text={shanDialogue}
+                className="tracking-[3px] font-medium text-base"
+              />
             </Chat>
           )}
         </div>
@@ -63,7 +66,10 @@ const ShaansConversation = () => {
           />
           {fetDialogue && (
             <Chat stylingclasses="border-green-500 h-[9rem] w-[50%] mt-10 mr-10">
-              <Typewriter text={fetDialogue} />
+              <Typewriter
+                text={fetDialogue}
+                className="tracking-[3px] font-medium text-base"
+              />
             </Chat>
           )}
         </div>

@@ -4,9 +4,10 @@ import React, { useState, useEffect, FC } from "react";
 interface TypewriterProps {
   text: string;
   delay?: number;
+  className?: string;
 }
 
-const Typewriter: FC<TypewriterProps> = ({ text, delay = 20 }) => {
+const Typewriter: FC<TypewriterProps> = ({ text, delay = 20, className }) => {
   const [currentText, setCurrentText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -32,7 +33,7 @@ const Typewriter: FC<TypewriterProps> = ({ text, delay = 20 }) => {
     }
   }, [text]);
 
-  return <span>{currentText}</span>;
+  return <span className={`${className}`}>{currentText}</span>;
 };
 
 export default Typewriter;

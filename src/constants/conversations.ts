@@ -6,23 +6,23 @@ interface IConveration {
 const ShanFetConversation: IConveration[] = [
   {
     key: "shan",
-    text: `wkjbckwldnckwdanclwmcds cmsndcknckwdncklqwn jkscnwkjcnwqcn kjndkwqbndckjqwendkwnfc`,
+    text: `That pesky queen is on the move. I have received intelligence that she's hiding in nearby quadrant apha!`,
   },
   {
     key: "fet",
-    text: `Right now queen is in hiding.`,
+    text: `I will prepare the fleet, My lord. We will get her this time.`,
   },
   {
     key: "shan",
-    text: `After the recent war with neighbouring planet
-      Falicornia, King Shan has exiled the Queen of Falicornia for 15
-      years. Right now queen is in hiding.`,
+    text: `Purge those traitorous planets, this mutiny will be punished by the wrath of th EMPIRE!`,
   },
   {
     key: "fet",
-    text: `In the distant distant galaxy of Tara B. On the planet of
-      Lengaburu. `,
+    text: `I will gather my squadron and send my best men sir! Treachery of the RESISTANCE must be squashed!`,
   },
 ];
+
+export const ShansVictoryDialogue =
+  "I have Found you now Falcornia!! You will spend 15 years in exile! Think it over and join the EMPIRE or i will end you next time!";
 
 export default ShanFetConversation;

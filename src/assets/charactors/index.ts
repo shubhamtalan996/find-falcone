@@ -1,7 +1,6 @@
-import FailedVader from "./failed-vader.png";
-import FirstAppranceVader from "./first-apprance-vader.png";
-import BobaFettHeadshot from "./boba-fett-headshot.png";
-
-import forceVader from "./force-vader.png";
+import FailedVader from "./failed-vader.webp";
+import FirstAppranceVader from "./first-apprance-vader.webp";
+import BobaFettHeadshot from "./boba-fett-headshot.webp";
+import forceVader from "./force-vader.webp";
 
 export { FailedVader, FirstAppranceVader, BobaFettHeadshot, forceVader };
