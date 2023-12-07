@@ -39,8 +39,6 @@ export const sendFleet = async (payload: ISelectionPayload) => {
   });
 
   const { token } = await rawTokenResponse.json();
-  console.log({ rawTokenResponse, token });
-
   if (token) {
     const requestPayload = {
       ...payload,
@@ -55,12 +53,12 @@ export const sendFleet = async (payload: ISelectionPayload) => {
         },
         body: JSON.stringify(requestPayload),
       });
-
       const result = (await response.json()) as IFindFalconeResponse;
-      console.log("Success:", result);
+
       return result;
     } catch (error) {
-      console.log(`[API Error]: error while fetching vehicles ${error}`);
+      console.log(`[API Error]: error while sending fleet ${error}`);
+      // return error;
     }
   }
 };

@@ -2,25 +2,12 @@ import React from "react";
 
 const StoryIntro = () => {
   return (
-    <div>
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          minHeight: "60vh",
-          top: "-25px",
-          backgroundImage: "linear-gradient(0deg, transparent, black 75%)",
-          zIndex: "1",
-        }}
-      ></div>
+    <>
+      <div className="relative w-100 min-h-[60vh] top-[-25px] z-1"></div>
       <section
-        className="star-wars flex justify-center  font-semibold text-starwars text-center font-starwars"
+        className="star-wars flex justify-center font-semibold text-starwars text-center font-starwars h-[200px] text-[500%] leading-[150%]"
         style={{
           perspective: "450px",
-          height: "200px",
-          fontSize: "500%",
-          lineHeight: "150%",
-          fontFamily: `'Pathway Gothic One', sans-serif`,
         }}
       >
         <div
@@ -29,10 +16,10 @@ const StoryIntro = () => {
         >
           <h1 className="text-4x font-extrabold">Find falcone...</h1>
           <p className="py-10 m-0 font-light text-md">
-            In the distant distant galaxy of Tara B. On the planet of Lengaburu.
-            After the recent war with neighbouring planet Falicornia, King Shan
-            has exiled the Queen of Falicornia for 15 years. Right now queen is
-            in hiding.
+            In the distant distant galaxy of Tara B. Story starts on the planet
+            of Lengaburu. After the recent deadly war with neighbouring planet
+            Falicornia, King Shan has exiled the Queen of Falicornia for 15
+            years. Right now queen is in hiding.
           </p>
           <h2 className="pr-4 m-0 font-light text-md">
             With all the assests available to king Shah find queen Falicornia..
@@ -44,10 +31,8 @@ const StoryIntro = () => {
         src={"/Star_Wars_Main_Theme_Song.mp3"}
         controls
         autoPlay
-      >
-        Davenport
-      </audio>
-    </div>
+      ></audio>
+    </>
   );
 };
 

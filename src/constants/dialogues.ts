@@ -6,7 +6,7 @@ interface IConveration {
 const ShanFetConversation: IConveration[] = [
   {
     key: "shan",
-    text: `That pesky queen is on the move. I have received intelligence that she's hiding in nearby quadrant apha!`,
+    text: `That pesky queen is on the move. I have received intelligence that she's hiding in nearby quadrant alpha!`,
   },
   {
     key: "fet",
@@ -23,9 +23,9 @@ const ShanFetConversation: IConveration[] = [
 ];
 
 export const ShansVictoryDialogue =
-  "I have Found you now Falcornia!! You will spend 15 years in exile! Think it over and join the EMPIRE or i will end you next time!";
+  "I have Found you now Falcornia!! You will spend 15 years in exile! Think it over and join the EMPIRE or i will end you next time i find you!";
 
 export const ShansLoseDialogue =
-  "`Ahhh! Damn the resistance! How can the entire fleet not find a single queen! Useless scums!`";
+  "Ahhh! Damn the resistance! How can the entire fleet not find a single queen! Useless scums!";
 
 export default ShanFetConversation;

@@ -48,10 +48,10 @@ const VehicleSelector: FC<VehicleSelectorProps> = ({
                 src={vehiclesImages[name as IVehiclesJsonEnum]}
                 alt={`Planet ${name}`}
               />
-              <div className="text-sm pt-2">
-                <p>{`Name:${name}(${total_no})`}</p>
-                <p>{`Range:${max_distance}`}</p>
-                <p>{`Speed:${speed}`}</p>
+              <div className="text-xs pt-2">
+                <p className="tracking-widest">{`Name: ${name}(${total_no})`}</p>
+                <p className="tracking-widest">{`Range: ${max_distance} ly`}</p>
+                <p className="tracking-widest">{`Speed: ${speed} warps`}</p>
               </div>
             </div>
           )

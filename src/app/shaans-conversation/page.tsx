@@ -6,7 +6,7 @@ import Navigation from "@/components/Navigation";
 import Typewriter from "@/components/Typewriter";
 import Chat from "@/components/Chat";
 import Button from "@/components/Button";
-import ShanFetConversation from "@/constants/conversations";
+import ShanFetConversation from "@/constants/dialogues";
 import { useRouter } from "next/navigation";
 
 const ShaansConversation = () => {
@@ -48,7 +48,7 @@ const ShaansConversation = () => {
             alt={`King Shan`}
           />
           {shanDialogue && (
-            <Chat stylingclasses="border-red-500 h-[10rem] mt-10 w-[50%]">
+            <Chat stylingclasses="border-red-500 mt-10 mb-[8rem] w-[50%]">
               <Typewriter
                 text={shanDialogue}
                 className="tracking-[3px] font-medium text-base"
@@ -65,7 +65,7 @@ const ShaansConversation = () => {
             alt={`Boba Fett`}
           />
           {fetDialogue && (
-            <Chat stylingclasses="border-green-500 h-[9rem] w-[50%] mt-10 mr-10">
+            <Chat stylingclasses="border-green-500 w-[50%] mb-[4rem] mt-10 mr-10">
               <Typewriter
                 text={fetDialogue}
                 className="tracking-[3px] font-medium text-base"

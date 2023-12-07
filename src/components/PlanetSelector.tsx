@@ -51,8 +51,8 @@ const PlanetSelector: FC<IPlanetsSelectorProps> = ({
                 alt={`Planet ${name}`}
               />
               <div className="text-sm pt-2">
-                <p>Name:{name}</p>
-                <p>Distance:{distance}</p>
+                <p className="tracking-widest">Name:{name}</p>
+                <p className="tracking-widest">Distance:{distance + " ly"}</p>
               </div>
             </div>
           );

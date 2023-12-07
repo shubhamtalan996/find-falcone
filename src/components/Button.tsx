@@ -6,26 +6,15 @@ interface ButtonProps
     HTMLButtonElement
   > {}
 
-const Button: FC<ButtonProps> = ({ children, ...props }) => {
+const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
   return (
     <button
       type="button"
+      className={`font-sans relative text-xs tracking-[2px] uppercase text-starwars cursor-pointer px-[1rem] py-[0.25rem] mx-[1rem] select-none touch-manipulation ${className}`}
       style={{
-        fontFamily: `"Open Sans", sans-serif`,
-        fontSize: "12px",
-        letterSpacing: "2px",
-        textDecoration: "none",
-        textTransform: "uppercase",
-        color: "#feda4a",
-        cursor: "pointer",
         border: "3px solid",
-        padding: "0.25rem 1rem",
-        margin: "0 1rem",
         boxShadow:
           "1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px",
-        position: "relative",
-        userSelect: "none",
-        touchAction: "manipulation",
       }}
       {...{ ...props }}
     >

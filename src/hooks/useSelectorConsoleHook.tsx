@@ -58,16 +58,17 @@ const useSelectorConsoleHook = (vehicles: IVehicle[], planets: IPlanet[]) => {
         const tripLogs = {
           timeTaken: getLabelValuePairs(
             "Time Taken:",
-            Number(planetDetails.distance) / Number(vehicleDetails.speed) + ""
+            Number(planetDetails.distance) / Number(vehicleDetails.speed) +
+              " parsecs"
           ),
           distanceCovered: getLabelValuePairs(
             "Distance Covered:",
-            Number(planetDetails.distance) + ""
+            Number(planetDetails.distance) + " ly"
           ),
 
           speed: getLabelValuePairs(
             "Speed:",
-            Number(vehicleDetails.speed) + ""
+            Number(vehicleDetails.speed) + " warps"
           ),
           spacecraft: getLabelValuePairs("Spacecraft:", vehicleName),
         };

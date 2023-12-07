@@ -7,9 +7,7 @@ import { useState } from "react";
 
 const useFindFalconeHook = () => {
   const [data, setData] = useState<IFindFalconeResponse>();
-
   const [loading, setLoading] = useState<boolean>(false);
-
   const [error, setError] = useState();
 
   const trigger = (requestData: ISelectionPayload) => {
@@ -23,7 +21,9 @@ const useFindFalconeHook = () => {
         .then((res) => {
           setData(res);
         })
-        .catch((err) => setError(err))
+        .catch((err) => {
+          setError(err);
+        })
         .finally(() => {
           setLoading(false);
         });
