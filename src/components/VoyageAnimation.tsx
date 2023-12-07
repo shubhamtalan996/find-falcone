@@ -4,7 +4,7 @@ import { IVoyageAnimationProps } from "@/interfaces/hooks-interfaces/selector-co
 
 const VoyageAnimation: FC<IVoyageAnimationProps> = ({ vehicle, planet }) => {
   return (
-    <div className="relative w-100">
+    <div className="relative w-100 overflow-x-clip">
       <div className="animate-linear-progress">
         <Image
           width={80}

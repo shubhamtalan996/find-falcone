@@ -21,7 +21,7 @@ const FalicorniaFound: FC<IFalicorniaFound> = ({ tripLogs, ...props }) => {
             className="my-14 animate-delayed-view"
             alt={`Shan winning`}
           />
-          <Chat stylingclasses="border-red-500 h-[8rem] mt-10 ml-10 w-[50%]">
+          <Chat stylingclasses="border-red-500 h-[9rem] mt-10 ml-10 w-[50%]">
             <Typewriter
               text={ShansVictoryDialogue}
               className="tracking-[3px] font-medium text-base"
