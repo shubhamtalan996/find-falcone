@@ -3,14 +3,13 @@
 import React, { FC } from "react";
 import VehicleSelector from "./VehicleSelector";
 import PlanetSelector from "./PlanetSelector";
-
 import { SelectorConsoleProps } from "@/interfaces/component-interfaces/selector-console-interface";
-import { planetsJson, spacecraftsJson } from "@/constants/assetsConfig";
 import { useRouter } from "next/navigation";
 import FalicorniaFound from "./FalicorniaFound";
 import Controls from "./Controls";
 import FalicorniaNotFound from "./FalicorniaNotFound";
 import useSelectorConsoleHook from "@/hooks/useSelectorConsoleHook";
+import { planetsJson, spacecraftsJson } from "@/config/assetsConfig";
 
 const SelectorConsole: FC<SelectorConsoleProps> = ({ planets, vehicles }) => {
   const router = useRouter();

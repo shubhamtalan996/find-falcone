@@ -6,8 +6,8 @@ import Navigation from "@/components/Navigation";
 import Typewriter from "@/components/Typewriter";
 import Chat from "@/components/Chat";
 import Button from "@/components/Button";
-import ShanFetConversation from "@/constants/dialogues";
 import { useRouter } from "next/navigation";
+import ShanFetConversation from "@/config/dialogues";
 
 const ShaansConversation = () => {
   const [chatText, setChatText] = useState({

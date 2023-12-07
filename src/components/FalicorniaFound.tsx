@@ -1,23 +1,11 @@
 import React, { FC } from "react";
-import Image, { StaticImageData } from "next/image";
-import VoyageAnimation, { IVoyageAnimationProps } from "./VoyageAnimation";
+import Image from "next/image";
+import VoyageAnimation from "./VoyageAnimation";
 import { forceVader } from "@/assets/charactors";
 import Chat from "./Chat";
 import Typewriter from "./Typewriter";
-import { ShansVictoryDialogue } from "@/constants/dialogues";
-
-export interface ILabelValuePair {
-  label: string;
-  value: string;
-}
-export interface IFalicorniaFound extends IVoyageAnimationProps {
-  tripLogs: {
-    timeTaken: ILabelValuePair;
-    distanceCovered: ILabelValuePair;
-    speed: ILabelValuePair;
-    spacecraft: ILabelValuePair;
-  };
-}
+import { IFalicorniaFound } from "@/interfaces/hooks-interfaces/selector-console-hook-interface";
+import { ShansVictoryDialogue } from "@/config/dialogues";
 
 const FalicorniaFound: FC<IFalicorniaFound> = ({ tripLogs, ...props }) => {
   return (

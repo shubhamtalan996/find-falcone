@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useEffect } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 interface NavigationProps {
@@ -11,9 +11,9 @@ interface NavigationProps {
 const Navigation: FC<NavigationProps> = ({ nextPageUrl, autoSkipTime }) => {
   const router = useRouter();
 
-  const navigate = () => {
+  const navigate = useCallback(() => {
     router.push(nextPageUrl);
-  };
+  }, [nextPageUrl, router]);
 
   useEffect(() => {
     if (autoSkipTime) {
@@ -24,7 +24,7 @@ const Navigation: FC<NavigationProps> = ({ nextPageUrl, autoSkipTime }) => {
         clearTimeout(animationTimer);
       };
     }
-  }, [autoSkipTime]);
+  }, [autoSkipTime, navigate]);
   return (
     <div>
       <button

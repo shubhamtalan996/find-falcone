@@ -5,8 +5,8 @@ import {
 } from "@/interfaces/api-interfaces/geektrust-api-interface";
 import { IAvailablePlanets } from "@/interfaces/component-interfaces/selector-console-interface";
 import React, { FC } from "react";
-import Image, { StaticImageData } from "next/image";
-import { IPlanetsJson, IPlanetsJsonEnum } from "@/constants/assetsConfig";
+import Image from "next/image";
+import { IPlanetsJson, IPlanetsJsonEnum } from "@/interfaces/config-interfaces";
 
 export interface IAvailableVehicles extends IVehicle {
   disabled?: boolean;

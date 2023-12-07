@@ -2,8 +2,11 @@
 
 import { IVehicle } from "@/interfaces/api-interfaces/geektrust-api-interface";
 import React, { FC } from "react";
-import Image, { StaticImageData } from "next/image";
-import { IVehiclesJson, IVehiclesJsonEnum } from "@/constants/assetsConfig";
+import Image from "next/image";
+import {
+  IVehiclesJson,
+  IVehiclesJsonEnum,
+} from "@/interfaces/config-interfaces";
 
 export interface IAvailableVehicles extends IVehicle {
   disabled?: boolean;

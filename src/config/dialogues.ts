@@ -1,9 +1,6 @@
-interface IConveration {
-  key: "shan" | "fet";
-  text: string;
-}
+import { IDialogue } from "@/interfaces/config-interfaces";
 
-const ShanFetConversation: IConveration[] = [
+const ShanFetConversation: IDialogue[] = [
   {
     key: "shan",
     text: `That pesky queen is on the move. I have received intelligence that she's hiding in nearby quadrant alpha!`,

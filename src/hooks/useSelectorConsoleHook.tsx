@@ -1,21 +1,18 @@
 import { IAvailableVehicles } from "@/components/VehicleSelector";
 import {
-  IPlanetsJsonEnum,
-  IVehiclesJsonEnum,
-  planetsJson,
-  spacecraftsJson,
-} from "@/constants/assetsConfig";
-import {
-  IFindFalconeResponse,
   IPlanet,
   ISelectionPayload,
   IVehicle,
 } from "@/interfaces/api-interfaces/geektrust-api-interface";
 import { IAvailablePlanets } from "@/interfaces/component-interfaces/selector-console-interface";
-import { geekTrustApi } from "@/utils/api";
 import { useState } from "react";
 import useFindFalconeHook from "./useFindFalconeHook";
-import { IFalicorniaFound } from "@/components/FalicorniaFound";
+import { IFalicorniaFound } from "@/interfaces/hooks-interfaces/selector-console-hook-interface";
+import {
+  IPlanetsJsonEnum,
+  IVehiclesJsonEnum,
+} from "@/interfaces/config-interfaces";
+import { planetsJson, spacecraftsJson } from "@/config/assetsConfig";
 
 const useSelectorConsoleHook = (vehicles: IVehicle[], planets: IPlanet[]) => {
   const {

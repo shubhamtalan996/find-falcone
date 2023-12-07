@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FailedVader } from "@/assets/charactors";
 import Chat from "./Chat";
 import Typewriter from "./Typewriter";
-import { ShansLoseDialogue } from "@/constants/dialogues";
+import { ShansLoseDialogue } from "@/config/dialogues";
 
 const FalicorniaNotFound = () => {
   return (

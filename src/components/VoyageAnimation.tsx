@@ -1,16 +1,6 @@
 import React, { FC } from "react";
 import Image, { StaticImageData } from "next/image";
-
-interface IAsset {
-  image: StaticImageData;
-  name: string;
-  alt: string;
-}
-
-export interface IVoyageAnimationProps {
-  vehicle: IAsset;
-  planet: IAsset;
-}
+import { IVoyageAnimationProps } from "@/interfaces/hooks-interfaces/selector-console-hook-interface";
 
 const VoyageAnimation: FC<IVoyageAnimationProps> = ({ vehicle, planet }) => {
   return (
